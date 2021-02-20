@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace NUnit_dolgozat_Bne
 {
     public class Jaratkezelo
     {
         private class Jarat {
-            private string jaratszam;
-            private string honnanrepter;
-            private string hovarepter;
-            private DateTime indulas;
-            private int keses;
+            public string jaratszam;
+            public string honnanrepter;
+            public string hovarepter;
+            public DateTime indulas;
+            public int keses;
 
             public Jarat(string jaratszam, string honnanrepter, string hovarepter, DateTime indulas)
             {
@@ -31,7 +32,10 @@ namespace NUnit_dolgozat_Bne
             public int Keses { get => keses; set => keses = value; }
         }
 
-
+        DateTime dateTime;
+        DateTime date = DateTime.Parse("yyyyMMdd");
+       
+        
         List<Jarat> jaratok;  
 
         public Jaratkezelo() {
@@ -39,7 +43,7 @@ namespace NUnit_dolgozat_Bne
             var date = new DateTime();
         }
 
-        private Jarat Jaratkeres(string jaratszam)
+        public Jarat Jaratkeres(string jaratszam, int keses)
         {
             foreach (var jarat in jaratok) {
                 if (jarat.Jaratszam == jaratszam) {
@@ -79,19 +83,19 @@ namespace NUnit_dolgozat_Bne
             jarat.Keses += percek;
         }
 
-        public void MikorIndul(string jaratszam, string honnan, DateTime indulas) {
+        public void MikorIndul(string jaratszam, string honnan, DateTime indulas, int percek) {
 
-          var jarat = Jaratkeres(jaratszam);
+            var jarat = Jaratkeres(jaratszam, percek);
             int ora;
             int perc; 
 
 
         }
 
-        public void JaratokRepuloterrol(string repter, string honnan, string hova)
+        public void JaratokRepuloterrol(string repter, string honnan, string hova, int percek)
         {
-            var honnanrepter = Jaratkeres(honnan);
-            var hovarepter = Jaratkeres(hova);
+            Jarat honnanrepter = Jaratkeres(honnan, percek);
+            var hovarepter = Jaratkeres(hova, percek);
            
             honnanrepter.Keses -= percek;
             hovarepter.Keses += percek;
